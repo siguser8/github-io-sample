@@ -44,18 +44,12 @@ jobs:
           FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
           echo $FILES | tr " " "\n" > files-changed.txt
           echo "Files Changed (.java) -->"
-          if egrep '[.java]$' files-changed.txt; 
-          then 
-          egrep '[.java]$' files-changed.txt > polaris-files-to-scan.txt
           export POLARIS_SERVER_URL=${{ secrets.POLARIS_SERVER_URL}}
           export POLARIS_ACCESS_TOKEN=${{ secrets.POLARIS_ACCESS_TOKEN}}
           export POLARIS_FF_ENABLE_COVERITY_INCREMENTAL=true
           wget -q ${{ secrets.POLARIS_SERVER_URL}}/api/tools/polaris_cli-linux64.zip
           unzip -j polaris_cli-linux64.zip -d /tmp
-          /tmp/polaris analyze -w --coverity-ignore-capture-failure --incremental polaris-files-to-scan.txt | tee polaris-output.txt
-          else 
-          echo "No source files were changed in this pull request. Polaris was not run."; 
-          fi
+          /tmp/polaris analyze -w --coverity-ignore-capture-failure --incremental files-changed.txt | tee polaris-output.txt
           
     # Please note that the ID in previous step was set to prescription
     # in order for this logic to work
