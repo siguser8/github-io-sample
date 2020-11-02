@@ -1,8 +1,9 @@
-name: "Synopsys Intelligent Security Scan"
+name: "Incremental - Synopsys Intelligent Security Scan"
 
 on:
-  push:
-    branches: [ master ]
+  pull_request:
+    branches: 
+      - '**'
 
 jobs:
   analyze:
@@ -32,18 +33,24 @@ jobs:
         workflowServerToken: ${{secrets.WORKFLOW_SERVER_TOKEN}}
         additionalWorkflowArgs: "--persona=developer"
         stage: "IO"
-    
+          
     # Please note that the ID in previous step was set to prescription
     # in order for this logic to work also make sure that POLARIS_ACCESS_TOKEN
     # is defined in settings
-    - name: Static Analysis with Polaris
+    - name: Incremental Static Analysis with Polaris
       if: ${{steps.prescription.outputs.sastScan == 'true' }}
       run: |
+          URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}/files"
+          FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
+          echo $FILES | tr " " "\n" | egrep '[.java]$' > "polaris-files-to-scan.txt"
+          echo "Files Changed (.java): "
+          cat polaris-files-to-scan.txt
           export POLARIS_SERVER_URL=${{ secrets.POLARIS_SERVER_URL}}
           export POLARIS_ACCESS_TOKEN=${{ secrets.POLARIS_ACCESS_TOKEN}}
+          export POLARIS_FF_ENABLE_COVERITY_INCREMENTAL=true
           wget -q ${{ secrets.POLARIS_SERVER_URL}}/api/tools/polaris_cli-linux64.zip
           unzip -j polaris_cli-linux64.zip -d /tmp
-          /tmp/polaris analyze -w
+          /tmp/polaris analyze -w --coverity-ignore-capture-failure --incremental polaris-files-to-scan.txt | tee polaris-output.txt
     
     # Please note that the ID in previous step was set to prescription
     # in order for this logic to work
@@ -51,7 +58,7 @@ jobs:
       if: ${{steps.prescription.outputs.scaScan == 'true' }}
       uses: blackducksoftware/github-action@v2
       with:
-         args: '--blackduck.url="${{ secrets.BLACKDUCK_URL}}" --blackduck.api.token="${{ secrets.BLACKDUCK_TOKEN}}" --detect.tools="SIGNATURE_SCAN,DETECTOR"'
+         args: '--blackduck.url="${{ secrets.BLACKDUCK_URL}}" --blackduck.api.token="${{ secrets.BLACKDUCK_TOKEN}}" --detect.tools="DETECTOR"'
     
     - name: Synopsys Intelligent Security Scan
       if: ${{ steps.prescription.outputs.sastScan == 'true' || steps.prescription.outputs.scaScan == 'true' }}

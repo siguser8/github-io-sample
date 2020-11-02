@@ -55,6 +55,7 @@ public class TransferController {
 		}
 		model.addAttribute("cashAccounts", cashAccounts);
 		model.addAttribute("account", account);
+		model.addAttribute("account", account);
 
 		response.addCookie(new Cookie("accountType", AccountType.PERSONAL));
 
@@ -68,11 +69,11 @@ public class TransferController {
 
 		if (bindingResult.hasErrors()) {
 			return newTransferForm(model, principal, response);
-		}
+		} 
 		else {
 			return AccountType.PERSONAL.equals(accountType) ? transferCheck(transfer, model, session, principal)
 					: transferConfirmation(transfer, model, principal, accountType);
-		}
+		}  
 	}
 
 	private String transferCheck(final Transfer transfer, final Model model, final HttpSession session, final Principal principal) {
@@ -117,6 +118,7 @@ public class TransferController {
    		model.addAttribute("transferbean", transfer);
 		model.addAttribute("transferbean", transfer);
 		model.addAttribute("account", account);
+		model.addAttribute("accountType", accountType);
 		model.addAttribute("accountType", accountType);
 
 		return "transferConfirmation";

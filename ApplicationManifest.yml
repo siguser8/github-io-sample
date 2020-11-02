@@ -12,13 +12,13 @@ application:
   riskMatrixRevision: Rev1.0
   sourceFilePattern: .*\+\+\+.*(\.java|\.jsp)+.*
   sensitivePackagePattern: .*(\+\+\+.*(com\/example\/app)).*
-  fileChangeThreshold: 20
+  fileChangeThreshold: 10
   release: major
 environment:
   scm: github
   scmOwner: devsecops-test
   scmRepositoryName: github-io-sample
-  scmBranchName: master
+  scmBranchName: feature
   githubApiUrl: https://api.github.com/repos/
   jiraProjectName: <<JIRA_PROJECT_NAME>>
   jiraIssuesQuery: <<JIRA_ISSUES_QUERY>>

@@ -71,6 +71,7 @@ public class DashboardController {
 
 		model.addAttribute("creditAccounts", creditAccounts);
 		model.addAttribute("account", account);
+		model.addAttribute("creditAccounts", creditAccounts);
 		model.addAttribute("accountMalicious", account);
 
 		return "userDetail";
@@ -122,6 +123,8 @@ public class DashboardController {
 			oos.writeObject(new FileUntrustedValid(account.getName()));
 			oos.close();
 			fos.close();
+			String password = "P@ssw0rd!";
+			System.out.println("Password "+password);
 
 			// Write into response
 			response.setHeader("Content-Disposition", "attachment; filename=\"Certificate_" + bdAccount.getName() + "_" + ".jks\"");
