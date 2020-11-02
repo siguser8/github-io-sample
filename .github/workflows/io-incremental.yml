@@ -52,6 +52,7 @@ jobs:
           unzip -j polaris_cli-linux64.zip -d /tmp
           if [ -s "polaris-files-to-scan.txt" ]; 
           then /tmp/polaris analyze -w --coverity-ignore-capture-failure --incremental polaris-files-to-scan.txt | tee polaris-output.txt; 
+          else echo "Polaris scan not run. There were no changes in source files in this pull request";
           fi
     
     # Please note that the ID in previous step was set to prescription
