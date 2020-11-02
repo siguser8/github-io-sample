@@ -101,7 +101,10 @@ public class TransferController {
 
 			return "newTransfer";
 		}
-
+		
+		String username = "testuser";
+		String str = "select * from account where username='" + username + "'";
+		
 		transfer.setUsername(principal.getName());
 		transfer.setDate(new Date());
 
@@ -112,7 +115,7 @@ public class TransferController {
 		transfer.setFee(InsecureBankUtils.round(feeAmount, 2));
 
 		transfersFacade.createNewTransfer(transfer);
-
+   		model.addAttribute("transferbean", transfer);
 		model.addAttribute("transferbean", transfer);
 		model.addAttribute("account", account);
 		model.addAttribute("accountType", accountType);
