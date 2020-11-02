@@ -43,7 +43,7 @@ jobs:
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}/files"
           FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
           echo $FILES | tr " " "\n" > files-changed.txt
-          echo Files Changed (.java) -->
+          echo "Files Changed (.java) -->"
           if egrep '[.java]$' files-changed.txt; 
           then 
           egrep '[.java]$' files-changed.txt > polaris-files-to-scan.txt
