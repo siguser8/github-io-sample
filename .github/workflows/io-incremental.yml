@@ -50,7 +50,9 @@ jobs:
           export POLARIS_FF_ENABLE_COVERITY_INCREMENTAL=true
           wget -q ${{ secrets.POLARIS_SERVER_URL}}/api/tools/polaris_cli-linux64.zip
           unzip -j polaris_cli-linux64.zip -d /tmp
-          /tmp/polaris analyze -w --coverity-ignore-capture-failure --incremental polaris-files-to-scan.txt | tee polaris-output.txt
+          if [ -s "polaris-files-to-scan.txt" ]; 
+          then /tmp/polaris analyze -w --coverity-ignore-capture-failure --incremental polaris-files-to-scan.txt | tee polaris-output.txt; 
+          fi
     
     # Please note that the ID in previous step was set to prescription
     # in order for this logic to work
