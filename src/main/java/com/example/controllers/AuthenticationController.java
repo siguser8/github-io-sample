@@ -9,7 +9,7 @@ public class AuthenticationController {
 
 	@RequestMapping("/login")
 	public String login(final Model model) {
-		return "login";
+		return "loginlogin";
 	}
 
 	@RequestMapping("/")
