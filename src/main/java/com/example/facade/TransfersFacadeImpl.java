@@ -42,6 +42,7 @@ public class TransfersFacadeImpl implements TransfersFacade {
 
 		double amount = actualAmount - transfer.getAmount();
 		double amountWithFees = amount - transfer.getFee();
+		double amountWithFees = amount - transfer.getFee();
 
 		/*
 		 * Actualizar tabla de CreditAcount
