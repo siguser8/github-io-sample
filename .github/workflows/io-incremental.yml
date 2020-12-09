@@ -66,7 +66,7 @@ jobs:
           --blackduck.api.token="${{ secrets.BLACKDUCK_TOKEN}}" \
           --detect.tools="SIGNATURE_SCAN,DETECTOR" \
           --detect.binary.scan.file.path=./insecure-bank.war
-    
+  
     - name: Synopsys Intelligent Security Scan
       if: ${{ steps.prescription.outputs.sastScan == 'true' || steps.prescription.outputs.scaScan == 'true' }}
       uses: synopsys-sig/intelligent-security-scan@v1
