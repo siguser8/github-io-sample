@@ -25,7 +25,7 @@ jobs:
     
     - name: Synopsys Intelligent Security Scan
       id: prescription
-      uses: synopsys-sig/intelligent-security-scan@v1
+      uses: synopsys-sig/intelligent-security-scan@26a9e0c
       with:
         ioServerUrl: ${{secrets.IO_SERVER_URL}}
         ioServerToken: ${{secrets.IO_SERVER_TOKEN}}
@@ -59,17 +59,10 @@ jobs:
       uses: blackducksoftware/github-action@v2
       with:
          args: '--blackduck.url="${{ secrets.BLACKDUCK_URL}}" --blackduck.api.token="${{ secrets.BLACKDUCK_TOKEN}}" --detect.tools="DETECTOR"'
-    
-    - name: Binary Analysis with Black Duck
-      run: bash <(curl -s https://detect.synopsys.com/detect.sh) \
-          --blackduck.url="${{ secrets.BLACKDUCK_URL}}" \
-          --blackduck.api.token="${{ secrets.BLACKDUCK_TOKEN}}" \
-          --detect.tools="SIGNATURE_SCAN,DETECTOR" \
-          --detect.binary.scan.file.path=./insecure-bank.war
   
     - name: Synopsys Intelligent Security Scan
       if: ${{ steps.prescription.outputs.sastScan == 'true' || steps.prescription.outputs.scaScan == 'true' }}
-      uses: synopsys-sig/intelligent-security-scan@v1
+      uses: synopsys-sig/intelligent-security-scan@26a9e0c
       with:
         ioServerUrl: ${{secrets.IO_SERVER_URL}}
         ioServerToken: ${{secrets.IO_SERVER_TOKEN}}
