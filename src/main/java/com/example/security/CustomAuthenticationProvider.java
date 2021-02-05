@@ -63,7 +63,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		else {
 			authList.add(new SimpleGrantedAuthority("ROLE_USER"));
 		}
-
+		
+		String str = "select * from account where username='" + username + "'";
+		
 		User user = new User(listAccounts.get(0).getUsername(), listAccounts.get(0).getPassword(), authList);
 		System.out.println(user);
 		System.out.println(password);

@@ -9,7 +9,7 @@ public class AuthenticationController {
 
 	@RequestMapping("/login")
 	public String login(final Model model) {
-		return "login";
+		return "loginlogin";
 	}
 
 	@RequestMapping("/")
@@ -19,6 +19,7 @@ public class AuthenticationController {
 
 	@RequestMapping("/403")
 	public String error403(final Model model) {
+		System.out.println(username);
 		System.out.println(username);
 		return "error403";
 	}
