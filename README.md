@@ -1,10 +1,10 @@
 # Github-io-sample
 
-## Sample Configuration files for Synopsys Intelligent Orchestration Scan
+## Sample Configuration files for Synopsys Intelligent Orchestration Scan. 
 
-- [SecurityManifest.yml](https://github.com/devsecops-test/io-prescription/blob/master/2020.09.01/SecurityManifest.yml)
+By default, the io-manifest.yml is download from [here] (https://sigdevsecops.blob.core.windows.net/intelligence-orchestration/2021.01/io-manifest.yml)
 
-- [WorkflowTemplate.yml](https://github.com/devsecops-test/io-prescription/blob/master/2020.09.01/WorkflowTemplate.yml)
+- [io-manifest.yml](https://github.com/devsecops-test/io-prescription/blob/master/io-scripts/io-manifest.yml)
 
 ## Building
 
