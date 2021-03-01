@@ -2,7 +2,7 @@
 
 ## Sample Configuration files for Synopsys Intelligent Orchestration Scan. 
 
-By default, the io-manifest.yml is download from [here] (https://sigdevsecops.blob.core.windows.net/intelligence-orchestration/2021.01/io-manifest.yml)
+By default, the io-manifest.yml is download from [here](https://sigdevsecops.blob.core.windows.net/intelligence-orchestration/2021.01/io-manifest.yml)
 
 - [io-manifest.yml](https://github.com/devsecops-test/io-prescription/blob/master/io-scripts/io-manifest.yml)
 
