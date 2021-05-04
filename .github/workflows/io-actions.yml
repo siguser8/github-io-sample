@@ -44,7 +44,7 @@ jobs:
           export POLARIS_ACCESS_TOKEN=${{ secrets.POLARIS_ACCESS_TOKEN}}
           wget -q ${{ secrets.POLARIS_SERVER_URL}}/api/tools/polaris_cli-linux64.zip
           unzip -j polaris_cli-linux64.zip -d /tmp
-          /tmp/polaris analyze -w
+          /tmp/polaris analyze -w --coverity-ignore-capture-failure
     
     # Please note that the ID in previous step was set to prescription
     # in order for this logic to work
